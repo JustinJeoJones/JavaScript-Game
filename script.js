@@ -32,22 +32,30 @@ function startCombat(username){//loops 3 fights against grant
     let enemy = new grant();
     let count = 0;
     while (count <= 3){
-        let dmg = getDamage();
-        enemy.hurt(dmg);
-        console.log(user.name + " did " + dmg + " to Grant. Grant hp:" + enemy.hp);
-        if (enemy.hp<= 0){
-            count = count + 1;
-            enemy.heal();
-            console.log("You have beat a grant.")
-            if (count >= 3)
-            {
+        var choice = prompt("Attack or quit?");
+        choice = choice.toLowerCase();
+        if (choice === "attack"){
+            let dmg = getDamage();
+            enemy.hurt(dmg);
+            console.log(user.name + " did " + dmg + " to Grant. Grant hp:" + enemy.hp);
+            if (enemy.hp<= 0){
+                count = count + 1;
+                enemy.heal();
+                console.log("You have beat a grant.");
+                if (count >= 3)
+                {
+                    console.log("The army of grants have fallen.")
+                    break;
+                }
+            }
+            dmg = getDamage();
+            user.hurt(dmg);console.log("Grant did " + dmg + " to "+user.name +". " +user.name +" hp:" + user.hp);
+            if (user.hp<=0){
+                console.log(user.name + " has died.");
                 break;
             }
-        }
-        dmg = getDamage();
-        user.hurt(dmg);console.log("Grant did " + dmg + " to "+user.name +". " +user.name +" hp:" + user.hp);
-        if (user.hp<=0){
-            console.log(user.name + " has died.");
+        } else if (choice === "quit") {
+            console.log(user.name + " has left like a coward.");
             break;
         }
     }
